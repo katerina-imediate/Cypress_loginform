@@ -14,7 +14,7 @@ describe('Invalid login action', () => {
 
     cy.get('.alert-danger').should('contain', 'Incorrect username or password.')
     
-
+    cy.screenshot('Capturing screenshot after successful execution under screenshots dir')
   //  cy.get('.dropdown-menu').contains('Navigation').click()
   })
 
