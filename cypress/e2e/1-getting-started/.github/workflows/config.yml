@@ -1,86 +1,21 @@
-name: example-env
+name: "tests"
 on:
+  pull_request:
   push:
     branches:
-      - 'master'
-  pull_request:
-  workflow_dispatch:
+      - master
+    
 
-env:
-  # pass an environment variable to Cypress
-  # a test can get its value like this
-  # Cypress.env('environmentName') // 'staging'
-  # see https://on.cypress.io/env
-  CYPRESS_environmentName: staging
 jobs:
-
-  e2e:
-    runs-on: ubuntu-24.04
+  tests_e2e:
+    name: Run end-to-end tests
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      # in the tests below, only the environment
-      # variable 'environmentName' will be set
-      - name: Cypress run with env
-        uses: ./
-        with:
-          working-directory: examples/env
-          spec: cypress/e2e/without-env.cy.js
-
-  with-env:
-    # in the tests below, in addition to 'environmentName'
-    # we are passing additional environment variables
-    # using "--env" command line option
-    # see https://on.cypress.io/configuration
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cypress run with env
-        uses: ./
-        with:
-          working-directory: 
-          # additional env variables to pass to Cypress specs
-          # variables are automatically casted
-          # Cypress.env('host') // 'http://api.dev.local'
-          # Cypress.env('apiPort') // 4222
-          env: 
-          spec: cypress/e2e/
-
-  with-action-env:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cypress run with env
-        uses: ./
-        # GH Actions workflow syntax allows
-        # each step to add more environment variables
-        # via additional "env" blocks
-        env:
-          CYPRESS_apiPort: 4222
-          CYPRESS_host: http://api.dev.local
-        with:
-          working-directory: examples/env
-          spec: cypress/e2e/spec.cy.js
-
-  combined-env:
-    # combination of all 3 ways to pass environment variables
-    # 'environmentName' value comes from the workflow's environment
-    # 'apiPort' comes from the step's "env" block
-    # 'host' is defined in the action's "with: env:" parameter
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: 
-        uses: 
-      
-        with:
-          env: 
-          working-directory: 
-          spec: 
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run tests
+        run: npx playwright test
