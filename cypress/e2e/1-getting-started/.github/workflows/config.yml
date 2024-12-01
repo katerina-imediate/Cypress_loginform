@@ -1,21 +1,17 @@
-name: "tests"
-on:
-  pull_request:
-  push:
-    branches:
-      - master
-    
+name: Cypress Tests
+
+on: push
 
 jobs:
-  tests_e2e:
-    name: Run end-to-end tests
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Install playwright browsers
-        run: npx playwright install --with-deps
-      - name: Run tests
-        run: npx playwright test
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
