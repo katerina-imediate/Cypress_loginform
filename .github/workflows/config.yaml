@@ -3,9 +3,16 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Cypress tests
+        uses: ./
+        with:
+          working-directory: e2e/start
+          browser: chrome
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
