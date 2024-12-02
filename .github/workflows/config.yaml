@@ -23,7 +23,7 @@ jobs:
         # because we are running these examples in a monorepo
         - run: npx cypress info
         - run: node --version
-        - run: npx build:ci
+        - run: npm ci
 
         # with:
         #   working-directory: e2e
