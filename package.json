@@ -1,5 +1,7 @@
 {
     "scripts": {
-      "cy:run": "npx cypress run"
+      "cy:run": "cypress run",
+      "start:ci": "npm start"
+
     }
   }
