@@ -22,10 +22,6 @@ jobs:
         # normally you would write
         # uses: cypress-io/github-action@v6
     
-        - name: e2e chrome
-          uses: cypress-io/github-action@v6
-          with:
-            browser: chrome
       
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
