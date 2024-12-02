@@ -9,24 +9,33 @@ jobs:
  install:
     runs-on: ubuntu-latest
     steps:
-
         - name: Checkout
           uses: actions/checkout@v4
-         
-    #   uses: cypress-io/github-action@v6
-        - name: Chrome 
-          uses: cypress-io/github-action@v4
+  
+        - name: Cypress install
+          uses: cypress-io/github-action@v6
           with:
-            build: npx cypress info
-            browser: chrome
-            record: true
+            runTests: false
             # config-file: cypress.config.js
-            # runTests: false 
            
-           
-            
-        - run: npx cypress run
-          working-directory: e2e
+        - run: npx cypress info
+        - run: node --version
+        - run: npm start:ci
+
+        - name: "e2e Tests - Chrome"
+        uses: cypress-io/github-action@v6
+        with:
+          build: npx cypress info
+          start: npm start:ci
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+         
+          config-file: cypress.config.ts
+        #   working-directory: e2e
+
         
         # normally you would write
         # uses: cypress-io/github-action@v6
