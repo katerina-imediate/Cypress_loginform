@@ -1,6 +1,6 @@
 {
     "scripts": {
-      "cy:run": "npx cypress run",
+      "cy:run": "npx cypress run --browser chrome" ,
       "start:ci": "npm ci"
 
     }
