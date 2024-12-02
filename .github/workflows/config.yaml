@@ -12,13 +12,20 @@ jobs:
 
         - name: Checkout
           uses: actions/checkout@v4
-          with:
-            browser: chrome
+         
   
         - name: Cypress install
           uses: cypress-io/github-action@v6
           with:
             runTests: false
+
+        - name: e2e on chrome
+          uses: actions/checkout@v4
+        
+        #   uses: cypress-io/github-action@v6
+            with:
+              browser: chrome
+            
         
         # normally you would write
         # uses: cypress-io/github-action@v6
