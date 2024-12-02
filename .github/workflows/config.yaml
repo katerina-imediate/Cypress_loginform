@@ -4,28 +4,32 @@ on:
   push:
     branches:
       - 'master'
-  
-
+        
 jobs:
-
-  chrome:
+ install:
     runs-on: ubuntu-latest
-    name: E2E on Chrome
     steps:
-      - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-
-      - name: Cypress tests
+        - name: Checkout
+          uses: actions/checkout@v4
+  
+        - name: Cypress install
+          uses: cypress-io/github-action@v6
+          with:
+            runTests: false
         # normally you would write
         # uses: cypress-io/github-action@v6
-        uses: ./
+      
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
-        with:
-          working-directory: e2e
+        - run: yarn cypress info
+        - run: node --version
+        - run: yarn build:ci
+
+        # with:
+        #   working-directory: e2e
           # just for full picture after installing Cypress
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info
-          build: npx cypress run
+          
+
+
