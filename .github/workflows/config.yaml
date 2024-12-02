@@ -21,11 +21,11 @@ jobs:
         - run: npx cypress info
         - run: node --version
         - run: npm ci
-        - run: npx cypress run
 
         - name: "e2e Tests - Chrome"
           uses: cypress-io/github-action@v6
-          with:
+          with:  
+           runTests: true
            build: npx cypress info
            start: npm ci
            wait-on: "http://localhost:3000"
