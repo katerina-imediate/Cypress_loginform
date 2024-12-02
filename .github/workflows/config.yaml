@@ -18,9 +18,12 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             build: npx cypress info
+            
             start: npm start:ci
-           
+    
             browser: chrome
+            record: true
+            config-file: cypress.config.js
             # runTests: false 
         
         # normally you would write
