@@ -12,12 +12,19 @@ jobs:
 
         - name: Checkout
           uses: actions/checkout@v4
+          with:
+            name: build
+            path: build
          
     #   uses: cypress-io/github-action@v6
         - name: Cypress install
           uses: cypress-io/github-action@v6
           with:
-            runTests: false 
+            build: npx cypress info
+            start: npm start:ci
+           
+            browser: chrome
+            # runTests: false 
         
         # normally you would write
         # uses: cypress-io/github-action@v6
@@ -25,10 +32,6 @@ jobs:
       
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
-        - run: npx cypress info
-        - run: node --version
-        - run: npm ci
-        - run: npx cypress run
 
         # with:
         #   working-directory: e2e
