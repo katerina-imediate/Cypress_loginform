@@ -1,11 +1,12 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   defaultCommandTimeout: 10000,
 
   e2e: {
-    setupNodeEvents(on, config) {
-     // supportFile: "cypress/support/e2e.ts"
-    },
+    baseUrl: "http://localhost:3000",
+    specPattern: "cypress/tests/**/*.spec.{js,jsx,ts,tsx}",
+    // supportFile: "cypress/support/e2e.ts",
+    
   },
 });
