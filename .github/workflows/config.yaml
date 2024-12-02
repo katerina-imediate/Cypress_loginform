@@ -15,14 +15,14 @@ jobs:
          
     #   uses: cypress-io/github-action@v6
         - name: Chrome 
-          uses: ./
+          uses: cypress-io/github-action@v6
           with:
             build: npx cypress info
             browser: chrome
             record: true
             # config-file: cypress.config.js
             # runTests: false 
-            uses: actions/upload-artifact@v4
+           
            
             
         - run: npx cypress run
