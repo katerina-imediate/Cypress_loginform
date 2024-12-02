@@ -21,9 +21,9 @@ jobs:
       
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
-        - run: yarn cypress info
+        - run: npx cypress info
         - run: node --version
-        - run: yarn build:ci
+        - run: npx build:ci
 
         # with:
         #   working-directory: e2e
