@@ -20,13 +20,13 @@ jobs:
            
         - run: npx cypress info
         - run: node --version
-        - run: start:ci
+        - run: npm ci
 
         - name: "e2e Tests - Chrome"
           uses: cypress-io/github-action@v6
           with:
            build: npx cypress info
-           start: start:ci
+           start: npm ci
            wait-on: "http://localhost:3000"
            wait-on-timeout: 120
            browser: chrome
